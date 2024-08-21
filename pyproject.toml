@@ -1,12 +1,12 @@
 [project]
-name = "plombery"
+name = "plombery-chinese"
 authors = [
-    {name = "Luca Faggianelli", email = "luca@velvetlab.tech"},
+    {name = "yhdsl", email = "56674878+yhdsl@users.noreply.github.com"},
 ]
-description = "Python task scheduler with a user-friendly web UI"
+description = "Bring Chinese page to project plombery"
 readme = {file = "README.md", content-type = "text/markdown"}
 requires-python = ">=3.8"
-keywords = ["pipeline", "task-scheduler", "apscheduler", "orchestrator", "web-ui", "fastapi", "pydantic"]
+keywords = ["pipeline", "task-scheduler", "apscheduler", "orchestrator", "web-ui", "fastapi", "pydantic", "plombery", "chinese"]
 license = {text = "MIT"}
 classifiers = [
     "Programming Language :: Python :: 3",
