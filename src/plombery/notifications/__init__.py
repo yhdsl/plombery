@@ -16,17 +16,17 @@ logger.setLevel(logging.DEBUG)
 
 
 PIPELINE_STATUS_TO_VERB = {
-    "running": "has started",
-    "completed": "has successfully completed 👌",
-    "failed": "failed ❌",
-    "cancelled": "was cancelled",
+    "running": "已开始运行",
+    "completed": "已成功完成 👌",
+    "failed": "运行失败 ❌",
+    "cancelled": "被取消运行",
 }
 
 
 def get_message_title(
     pipeline_name: str, pipeline_run_status: PipelineRunStatus
 ) -> str:
-    return f"Pipeline {pipeline_name} {get_pipeline_status_verb(pipeline_run_status)}"
+    return f"管道 {pipeline_name} {get_pipeline_status_verb(pipeline_run_status)}"
 
 
 class NotificationManager:

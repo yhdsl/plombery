@@ -4,10 +4,10 @@ from plombery.schemas import PipelineRunStatus
 
 
 _PIPELINE_STATUS_TO_VERB: Dict[PipelineRunStatus, str] = {
-    PipelineRunStatus.RUNNING: "has started",
-    PipelineRunStatus.COMPLETED: "has successfully completed",
-    PipelineRunStatus.FAILED: "failed",
-    PipelineRunStatus.CANCELLED: "was cancelled",
+    PipelineRunStatus.RUNNING: "已开始运行",
+    PipelineRunStatus.COMPLETED: "已成功完成",
+    PipelineRunStatus.FAILED: "运行失败",
+    PipelineRunStatus.CANCELLED: "被取消运行",
 }
 
 
