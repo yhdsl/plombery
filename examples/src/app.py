@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 """
-Run via the run.sh or run.ps1 script
+改用 run.sh 或 run.ps1 脚本运行
 """
 
 from plombery import get_app  # noqa: F401
@@ -12,7 +12,6 @@ import sales_pipeline, sync_pipeline, ssl_certificates  # noqa: F401
 if __name__ == "__main__":
     import uvicorn
 
-    # `reload_dirs` is used to reload when the plombery package itself changes
-    # this is useful during development of the plombery package, normally shouldn't
-    # be used
+    # `reload_dirs` 用于在 plombery 包本身发生变化时重新加载全部内容
+    # 这在开发过程中很有帮助，但通常不应该使用
     uvicorn.run("plombery:get_app", reload=True, factory=True, reload_dirs="..")

@@ -1,12 +1,14 @@
+import enum
+
 from asyncio import sleep
 from datetime import datetime
-import enum
 from typing import Optional
-from dateutil import tz
 
-from apscheduler.triggers.interval import IntervalTrigger
 import numpy as np
 import pandas as pd
+
+from apscheduler.triggers.interval import IntervalTrigger
+from dateutil import tz
 from pydantic import BaseModel, Field
 
 from plombery import register_pipeline, task, Trigger, get_logger
@@ -19,10 +21,10 @@ class StoreLocations(enum.Enum):
 
 
 class InputParams(BaseModel):
-    """Showcase all the available input types in Plombery"""
+    """展示 Plombery 中所有可用的输入类型"""
 
     pick_a_number: int
-    iterations: int = Field(ge=0, le=10, default=5, description="How many times?")
+    iterations: int = Field(ge=0, le=10, default=5, description="迭代多少次数?")
     notes: Optional[str] = None
     store: StoreLocations = StoreLocations.Milan
     some_flag: bool = True
@@ -30,7 +32,7 @@ class InputParams(BaseModel):
 
 @task
 async def get_sales_data(params: InputParams) -> pd.DataFrame:
-    """Fetch raw sales data by store and SKU"""
+    """按商店和 SKU 获取原始的销售数据"""
 
     logger = get_logger()
 
@@ -59,13 +61,13 @@ async def get_sales_data(params: InputParams) -> pd.DataFrame:
 
 register_pipeline(
     id="sales_pipeline",
-    description="""This is a very useless pipeline""",
+    description="""一个没什么用处的管道""",
     tasks=[get_sales_data],
     triggers=[
         Trigger(
             id="daily",
-            name="Daily",
-            description="Run the pipeline every day",
+            name="每日",
+            description="每天运行管道",
             params=InputParams(pick_a_number=2, store=StoreLocations.Milan),
             schedule=IntervalTrigger(
                 days=1,

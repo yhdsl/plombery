@@ -12,8 +12,8 @@ class InputParams(BaseModel):
 @task
 def sync_task():
     """
-    This task is not async though it shouldn't block
-    the rest of the app
+    这个任务不是异步的，
+    但不会阻塞程序
     """
     get_logger().debug("Im going to sleep for 10secs")
     time.sleep(10)
@@ -21,7 +21,7 @@ def sync_task():
 
 register_pipeline(
     id="sync_pipeline",
-    description="This pipeline contains a sync task",
+    description="包含同步任务的管道",
     tasks=[sync_task],
     params=InputParams,
 )

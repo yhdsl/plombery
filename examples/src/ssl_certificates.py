@@ -1,13 +1,15 @@
 import ssl
 import socket
+
 from datetime import datetime, timezone
 
 from apscheduler.triggers.interval import IntervalTrigger
+from pydantic import BaseModel, Field
+
 from plombery import register_pipeline
 from plombery.logger import get_logger
 from plombery.pipeline import task
 from plombery.pipeline.trigger import Trigger
-from pydantic import BaseModel, Field
 
 
 EXPIRATION_WARNING_THRESHOLD = 30
@@ -50,7 +52,7 @@ def get_certificate_info(hostname):
 
 class InputParams(BaseModel):
     hostname: str = Field(
-        description="The hostname without any scheme, i.e. google.com"
+        description="无前缀的域名，例如 google.com"
     )
 
 
@@ -77,15 +79,15 @@ async def check_certificate_expiration(params: InputParams):
 
 register_pipeline(
     id="check_ssl_certificate",
-    name="Check SSL certificate",
-    description="""Check if the SSL certificate of a website has expired""",
+    name="检查 SSL 证书",
+    description="""检查网站的 SSL 证书是否已过期""",
     tasks=[check_certificate_expiration],
     triggers=[
-        # Create 1 trigger per each host to check
+        # 为每个主机单独创建一个触发器来运行检查
         Trigger(
             id=f"check-{host}",
             name=host,
-            description="Run the pipeline every week",
+            description="每周运行管道",
             params=InputParams(hostname=host),
             schedule=IntervalTrigger(
                 weeks=1,
