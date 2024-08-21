@@ -1,38 +1,38 @@
-# Create your first pipeline
+# 创建你的第一个管道
 
-Create a new folder in your project root with
-a file named `app.py` (or any name you want) in it,
-as in Python files should be in a top-level package.
+在你的项目根目录内创建一个新文件夹，
+并在其中新建一个 `app.py` 文件 (或其他你喜欢的名称)，
+注意该文件必需位于最顶层的包内。
 
-This should be your folder structure:
+你的文件夹结构应该类似如下:
 
 ``` { .sh .no-copy }
 .
-├─ .venv/ # virtual environment folder
+├─ .venv/ # 虚拟环境文件夹
 └─ src/
-   ├─ __init__.py # empty file needed to declare Python modules
-   └─ app.py # entrypoint to the project
+   ├─ __init__.py # 一个用于声明 Python 包的空文件
+   └─ app.py # 项目入口
 ```
 
-## Glossary
+## 词汇表
 
-Before starting, let's define some naming so there will be no confusion!
+在开始之前，先让我们了解一些名词，以免造成困扰！
 
-* **Task**: a python function that performs some job, it's the base block for building a pipeline
-* **Pipeline**: a sequence of 1 or more *Task*s, a pipeline can be run via a schedule, manually, etc.
-* **Trigger**: is the entrypoint to run a pipeline, a trigger can be a schedule, a webhook, a button on the web UI, etc.
-* **Pipeline Run**: (sometimes simply referred as *Run*) is the result of running a pipeline
+* **任务**: 执行某项工作的 Python 函数，它是构建管道的基础部分
+* **管道**: 一个或多个*工作*的有序序列，管道可以通过调度或手动的方式运行
+* **触发器**: 是管道运行的入口，一个触发器可以是调度、webhook 或 Web UI 上的按钮
+* **管道运行状态**: (有时简称为*运行状态*) 是一个管道运行的结果
 
-## Basic pipeline
+## 一个简单的管道
 
-### Create a task
+### 创建任务
 
-A *Task* is the base block in Plombery and it's just a Python function that
-performs an action, i.e. download some data from an HTTP API, runs a query on a DB, etc.
+*任务*是 Plombery 中的基础部分，它只是一个执行简单操作的 Python 函数，
+例如利用 HTTP API 下载一些数据，或者在 DB 上进行查询等。
 
 !!! info
 
-    notice how the `@task` decorator is used to declare a task
+    注意是如何使用 `@task` 装饰器声明任务的
 
 ```py title="src/app.py"
 from datetime import datetime
@@ -44,13 +44,13 @@ from plombery import task, get_logger, Trigger, register_pipeline
 
 @task
 async def fetch_raw_sales_data():
-    """Fetch latest 50 sales of the day"""
+    """获取当天最新的 50 条销售记录"""
 
-    # using Plombery logger your logs will be stored
-    # and accessible on the web UI
+    # 使用 Plombery 的 logger 储存你的日志
+    # 并可在 Web UI 中实时查看
     logger = get_logger()
 
-    logger.debug("Fetching sales data...")
+    logger.debug("获取销售记录...")
 
     sales = [
         {
@@ -62,37 +62,37 @@ async def fetch_raw_sales_data():
         for _ in range(50)
     ]
 
-    logger.info("Fetched %s sales data rows", len(sales))
+    logger.info("已获取 %s 行销售记录", len(sales))
 
-    # Return the results of your task to have it stored
-    # and accessible on the web UI
-    # If you have other tasks, the output of a task is
-    # passed to the following one
+    # 返回任务运行结果进行储存
+    # 并可在 Web UI 中实时查看
+    # 如果随后还有其他的任务
+    # 那么该输出将会被传递
     return sales
 ```
 
-### Create a pipeline
+### 创建管道
 
-A *Pipeline* contains a list of tasks and eventually a list of triggers,
-so in your `app.py` add this:
+*管道*包含了一系列的任务，以及若干个触发器，
+在你的 `app.py` 中添加如下内容:
 
 ```py title="src/app.py"
 register_pipeline(
     id="sales_pipeline",
-    description="Aggregate sales activity from all stores across the country",
+    description="汇总全国所有门店的销售活动",
     tasks = [fetch_raw_sales_data],
     triggers = [
         Trigger(
             id="daily",
-            name="Daily",
-            description="Run the pipeline every day",
+            name="每日",
+            description="每天运行管道",
             schedule=IntervalTrigger(days=1),
         ),
     ],
 )
 ```
 
-Finally add this at the bottom of your file to start the app:
+最后通过添加以下内容启动程序:
 
 ```py title="src/app.py"
 if __name__ == "__main__":
@@ -101,9 +101,9 @@ if __name__ == "__main__":
     uvicorn.run("plombery:get_app", reload=True, factory=True)
 ```
 
-Now your `src/app.py` should look like this:
+现在你的 `src/app.py` 应该看起来如下:
 
-??? Example "Click to see the full content of src/app.py"
+??? Example "单击查看 src/app.py 文件的完整内容"
 
     ```py title="src/app.py"
     from datetime import datetime
@@ -115,13 +115,13 @@ Now your `src/app.py` should look like this:
 
     @task
     async def fetch_raw_sales_data():
-        """Fetch latest 50 sales of the day"""
+        """获取当天最新的 50 条销售记录"""
 
-        # using Plombery logger your logs will be stored
-        # and accessible on the web UI
+        # 使用 Plombery 的 logger 储存你的日志
+        # 并可在 Web UI 中实时查看
         logger = get_logger()
 
-        logger.debug("Fetching sales data...")
+        logger.debug("获取销售记录...")
 
         sales = [
             {
@@ -133,22 +133,24 @@ Now your `src/app.py` should look like this:
             for _ in range(50)
         ]
 
-        logger.info("Fetched %s sales data rows", len(sales))
-
-        # Return the results of your task to have it stored
-        # and accessible on the web UI
+        logger.info("已获取 %s 行销售记录", len(sales))
+    
+        # 返回任务运行结果进行储存
+        # 并可在 Web UI 中实时查看
+        # 如果随后还有其他的任务
+        # 那么该输出将会被传递
         return sales
 
 
     register_pipeline(
         id="sales_pipeline",
-        description="Aggregate sales activity from all stores across the country",
-        tasks=[fetch_raw_sales_data],
-        triggers=[
+        description="汇总全国所有门店的销售活动",
+        tasks = [fetch_raw_sales_data],
+        triggers = [
             Trigger(
                 id="daily",
-                name="Daily",
-                description="Run the pipeline every day",
+                name="每日",
+                description="每天运行管道",
                 schedule=IntervalTrigger(days=1),
             ),
         ],
@@ -161,16 +163,17 @@ Now your `src/app.py` should look like this:
 
     ```
 
-### Run the app
+### 运行程序
 
-Plombery is based on FastAPI so you can run it as a normal FastAPI app
-via `uvicorn` (as in this example) or another ASGI web server.
+Plombery 是基于 FastAPI 开发的， 
+因此你可以使用 `uvicorn` (如本例所示) 或其他的 ASGI web 服务器以将其做为一个普通的 FastAPI
+程序运行
 
-So install `uvicorn` and run the app:
+安装 `uvicorn` 并运行程序:
 
 ```sh
 pip install uvicorn
 python src/app.py
 ```
 
-Now open the page [http://localhost:8000](http://localhost:8000){target=_blank} in your browser and enjoy!
+接下来访问 [http://localhost:8000](http://localhost:8000){target=_blank} 并尽情享受吧!

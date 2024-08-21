@@ -1,16 +1,14 @@
-Plombery is configurable via environmental variables, a YAML file
-or even better via a combination of the 2.
+Plombery 可以通过环境变量、YAML 配置文件或者混合两者 (推荐) 进行配置。
 
-!!! info "Why a hybrid configuration?"
+!!! info "为什么建议使用混合配置?"
 
-    An entire configuration can be quite large so storing it as environmental
-    variables can be quite hard to maintain, moreover some parts of the
-    configuration should be stored together with the code as they are part
-    of the system and some parts of it are secret so you need env vars
+    项目所需的完整配置可能非常大，因此完全使用环境变量进行配置将难以维护，
+    但一般配置文件都会与项目文件一同储存，对于某些机密配置，
+    因此仍需要使用环境变量。
 
-Create a configuration file in the root of your project named `plombery.config.yaml`
-(or `plombery.config.yml` if you prefer) and set the values you need, you should
-commit this file to the git repo:
+在项目的根目录中创建一个名为 `plombery.config.yaml` 的配置文件
+(或者命名为 `plombery.config.yml` 如果你喜欢)，并在内设置你希望的选择，
+建议将其提交至 git 内。
 
 ```yaml title="plombery.config.yaml"
 frontend_url: https://pipelines.example.com
@@ -28,17 +26,16 @@ notifications:
       - $MSTEAMS_WEBHOOK
 ```
 
-Now define the secrets as environmental variables in a `.env` file,
-in your shell or in your hosting environment.
+此外将机密设置储存在 `.env` 文件、shell 或托管环境的环境变量中。
 
 
 !!! tip
 
-    By default, Plombery will load any `.env` found in your project root.
+    默认情况下，Plombery 将加载任何在项目根目录下找到的任何 `.env` 文件。
 
 !!! Warning
 
-    You shouldn't commit the `.env` file as it contains secrets!
+    不要将 `.env` 提交到 git 上，其中包含有机密设置!
 
 ```shell title=".env"
 # Auth
@@ -50,116 +47,121 @@ GMAIL_ACCOUNT=mailto://myuser:mypass@gmail.com
 MSTEAMS_WEBHOOK=msteams://TokenA/TokenB/TokenC/
 ```
 
-## System
+## 软件配置
 
 !!! tip
 
-    If you're running Plombery locally, in most cases you don't need to change
-    these settings
+    如果你仅在本地运行 Plombery，大多数情况下并不需要修改这些配置
 
 ### `database_url`
 
-The Sqlite DB URI, by default `sqlite:///./plombery.db`
+Sqlite 数据库的 URI 或地址，默认为 `sqlite:///./plombery.db`。
 
 ### `allowed_origins`
 
-It allows to configure the CORS header `Access-Control-Allow-Origin`,
-by default it's value is `*` so it allows all origins.
+配置允许的 CORS 标头 `Access-Control-Allow-Origin`，
+默认为 `*` 以允许所有来源。
 
-**Change it if running in production.**
+**如果将 Plombery 用于生产，请进行必要的修改**
 
 ### `frontend_url`
 
-The URL of the frontend, by default is the same as the backend,
-change it if the frontend is served at a different URL, for example
-during the frontend development.
+前端 URL 默认与后端相同，
+如果前端在不同的 URL 上提供帮助 (例如正在进行前端开发)，
+请进行相应的修改。
 
-## Notifications
+### `run_data_storage`
 
-Plombery can send notifications after a pipeline has run based on the status
-of the run itself (success, failure, etc.).
+指定储存运行结果的文件夹，默认为项目根目录下的 `.data` 文件夹。
 
-The notifications configuration can be defined in the YAML
-file as a list of [`NotificationRule`](#notificationrule)s:
+!!! warning
+
+    这是中文版本单独添加的配置项，
+    如果你使用的是原版 Plombery，
+    这将不会有任何效果。
+
+## 通知配置
+
+Plombery 可以在管道运行结束后根据运行状态 (成功、失败等等) 发送通知。
+
+通知配置在 YAML 中使用包含若干 [`NotificationRule`](#notificationrule) 的列表进行配置:
 
 ```yaml title="plombery.config.yaml"
 notifications:
-  # Send notifications only if the pipelines failed
+  # 仅在管道运行失败后发送通知
   - pipeline_status:
       - failed
     channels:
-      # Send them to my gmail address (from my address itself)
-      # Better to use an env var here
+      # 将其发送至我的邮箱 (从我的邮箱内发送)
+      # 最好将其移动至 env 内
       - mailto://myuser:mypass@gmail.com
-  # Send notifications only if the pipelines succeeded or was cancelled
+  # 仅在管道运行成功或被取消后发送通知
   - pipeline_status:
       - completed
       - cancelled
     channels:
-      # Send them to a MS Teams channel
-      # Better to use an env var here
+      # 将其发送至 MS Teams 频道内
+      # 最好将其移动至 env 内
       - msteams://mychanneltoken
 ```
 
 ### `NotificationRule`
 
-A notification rule defines when to send notifications and to whom.
+定义何时通知以及向谁发送通知的规则。
 
 #### `pipeline_status`
 
-A list of 1 or more pipeline run status among:
+包含若干个管道运行状态的列表:
 
-  * `completed`
-  * `failed`
-  * `cancelled`
+  * `completed`: 成功
+  * `failed`: 失败
+  * `cancelled`: 取消
 
 #### `channels`
 
-A list of 1 or more recipients where to send the notifications.
+包含若干个通知对象的列表。
 
-A channel is an *Apprise* URI string that defines an email address or a MS Teams
-channel, for example:
+每个 `channels` 都必需是合法的 *Apprise* URI 字符串，例如:
 
-* **Email** mailto://myuser:mypass@gmail.com
+* **电子邮件** mailto://myuser:mypass@gmail.com
 * **MS Teams** msteams://TokenA/TokenB/TokenC/
 * **AWS SES** ses://user@domain/AccessKeyID/AccessSecretKey/RegionName/email1/
 
-Behind the scene Plombery uses [Apprise](https://github.com/caronc/apprise),
-a library to send notifications to many notification providers, so check their
-docs for a full list of the available channels.
+Plombery 在后端使用 [Apprise](https://github.com/caronc/apprise) 进行通知，
+这是一个可以向众多通知服务发送通知的库，
+因此请查看其文档以获取全部可用的通知对象，以及对应的Apprise URI。
 
-## Authentication
+## 身份验证配置
 
-Plombery has a buil-in and ready-to-use authentication system
-based on OAuth providers, so you can use your corporate auth system
-or Google, Github, etc.
+Plombery 有一个内置且开箱即用的基于 OAuth 的身份验证系统，
+因此你可以接入企业身份验证，或者 Google、Github等身份验证服务。
 
-To enable the auth system you just need to configure it.
+仅需简单的配置便可以启用基于 OAuth 的身份验证系统。
 
-!!! info "Good to know"
+!!! info "好消息"
 
-    The auth system is based on [Authlib](https://authlib.org/)
+    该身份验证系统基于 [Authlib](https://authlib.org/)
 
 ### `AuthSettings`
 
-Options available
+可配置的选项如下:
 
 #### `client_id`
 
-An OAuth app client ID
+OAuth 客户端的 ID
 
 #### `client_secret`
 
-An OAuth app client secret
+OAuth 客户端的机密 (secret)
 
 #### `server_metadata_url`
 
-This a special URL that contains information about the OAuth provider
-specific endpoints. If your provider doesn't have this URL or you don't
-know it, you need to fill up the values for the other URLs: `access_token_url`,
-`authorize_url` and `jwks_uri`.
+这是一个特殊的 URL，其中包含 OAuth 服务提供商给出的特定元数据，
+如果服务提供商未给出，或者你不知道该如何填写，
+那么你还需要指定其它与 URL 有关的配置: `access_token_url`,
+`authorize_url` 和 `jwks_uri`。
 
-Here a table of well known Metadata URLs:
+这里有一个元数据为 well known 的 URL :
 
 | Provider | URL |
 | -------- | --- |
@@ -167,14 +169,20 @@ Here a table of well known Metadata URLs:
 
 #### `access_token_url`
 
+无描述
+
 #### `authorize_url`
 
-#### `jwks_uri`
+无描述
+
+#### `jwks_url`
+
+无描述
 
 #### `client_kwargs`
 
-Additional values to pass to the OAuth client during the auth
-process, for example the scope:
+在身份验证过程中传递给 OAuth 身份验证系统的额外参数，
+以下为一个指定验证范围的例子:
 
 ```yaml
 auth:
@@ -184,5 +192,5 @@ auth:
 
 #### `secret_key`
 
-Secret key used in the backend middleware, this has a dummy default value,
-but in production you should define a decent value.
+后端中间件所使用的密钥，
+尽管有默认值，但用于生产时建议设置为一个更安全的值

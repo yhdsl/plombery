@@ -1,35 +1,35 @@
 !!! example
-    The full source code for this example is available
-    [here](https://github.com/lucafaggianelli/plombery/blob/main/examples/src/ssl_certificates.py)
+    可以在[此处](https://github.com/yhdsl/plombery/blob/main/examples/src/ssl_certificates.py)找到完整的代码
 
-Managing SSL certificate expiration dates manually can be a challenging and error-prone task,
-especially in environments with a large number of hostnames to check.
+手动管理 SSL 证书的到期日期可能是一项具有挑战性且容易出错的任务，
+尤其是在需要检查大量域名的环境中。
 
-Failing to renew certificates on time can result in unexpected outages and security breaches.
-To address this issue, you can use Plombery to automate the monitoring of SSL certificate expiration
-dates and receive notifications when a certificate is due to expire.
+未能及时更新 SSL 证书可能会导致服务意外中断以及安全漏洞。
+为了解决此问题，可以使用 Plombery 来自动监控 SSL 证书的到期日期
+，并在证书即将到期时收到通知。
 
 <figure markdown>
-  ![The SSL check pipeline](/plombery/assets/images/recipes/ssl_check.png)
-  <figcaption>The SSL check pipeline</figcaption>
+  ![检查 SSL 证书的管道](/plombery/assets/images/recipes/ssl_check.png)
+  <figcaption>检查 SSL 证书的管道</figcaption>
 </figure>
 
 <figure markdown>
-  ![The run page with logs](/plombery/assets/images/recipes/ssl_check_run.png)
-  <figcaption>The run page with logs</figcaption>
+  ![带有日志的运行状态页面](/plombery/assets/images/recipes/ssl_check_run.png)
+  <figcaption>带有日志的运行状态页面</figcaption>
 </figure>
 
-You can also run an SSL check on the fly via the manual trigger:
+你也可以通过手动运行的方式动态的检查 SSL 证书:
 
 <figure markdown>
-  ![Manual run](/plombery/assets/images/recipes/ssl_check_manual.png)
-  <figcaption>Manual run</figcaption>
+  ![手动运行](/plombery/assets/images/recipes/ssl_check_manual.png)
+  <figcaption>手动运行</figcaption>
 </figure>
 
-## How to
+## 如何实现
 
-Define a list of hostnames you want to check and create 1 trigger for each of them so
-once a trigger fails you know which hostname is concerned:
+定义一个包含待检查域名的列表，
+并单独为每个域名创建一个触发器，
+这样一旦运行失败， 你就能快速定位至故障的域名:
 
 ```py
 --8<-- "examples/src/ssl_certificates.py:14:17"
@@ -37,10 +37,9 @@ once a trigger fails you know which hostname is concerned:
 --8<-- "examples/src/ssl_certificates.py:78:97"
 ```
 
-The pipeline in this example has only 1 task but you could add additional
-checks on the SSL certificate as additional tasks:
+该示例中的管道只有一个任务，
+但你可以将额外检查 SSL 证书做为附加的任务:
 
 ```py
 --8<-- "examples/src/ssl_certificates.py:57:75"
 ```
-

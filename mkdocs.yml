@@ -13,6 +13,8 @@ theme:
   logo: assets/images/mario-pipe-flower.png
   favicon: assets/images/mario-pipe-flower.png
 
+  language: zh
+
   palette:
      # Palette toggle for light mode
     - media: "(prefers-color-scheme: light)"
@@ -21,7 +23,7 @@ theme:
       accent: cyan
       toggle:
         icon: material/weather-sunny
-        name: Switch to dark mode
+        name: 切换至深色主题
 
     # Palette toggle for dark mode
     - media: "(prefers-color-scheme: dark)"
@@ -30,7 +32,7 @@ theme:
       accent: cyan
       toggle:
         icon: material/weather-night
-        name: Switch to light mode
+        name: 切换至浅色主题
 
   features:
     - content.action.view
@@ -66,15 +68,15 @@ markdown_extensions:
         - "."
 
 nav:
-  - Welcome: index.md
-  - Get Started:
-    - Install: get-started.md
-    - Your first pipeline: create-a-pipeline.md
-  - Docs:
-    - Pipelines: pipelines.md
-    - Tasks: tasks.md
-    - Triggers: triggers.md
-    - Configuration: configuration.md
-    - Deployment: deployment.md
-  - Recipes:
-    - SSL Certificate Check: recipes/certificates-expiration.md
+  - 欢迎使用: index.md
+  - 快速开始:
+    - 安装: get-started.md
+    - 你的第一个管道: create-a-pipeline.md
+  - 文档:
+    - 管道: pipelines.md
+    - 任务: tasks.md
+    - 触发器: triggers.md
+    - 配置: configuration.md
+    - 部署: deployment.md
+  - 用例参考:
+    - SSL证书检查: recipes/certificates-expiration.md
