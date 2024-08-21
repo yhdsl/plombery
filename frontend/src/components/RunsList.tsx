@@ -11,6 +11,7 @@ import {
   Title,
 } from '@tremor/react'
 import { formatDistanceToNow, differenceInDays } from 'date-fns'
+import { zhCN } from "date-fns/locale"
 import { useCallback, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { HTTPError } from 'ky'
@@ -80,17 +81,17 @@ const RunsList: React.FC<Props> = ({ pipelineId, query, triggerId }) => {
 
   return (
     <Card>
-      <Title>Runs</Title>
+      <Title>运行状态</Title>
 
       <Table className="overflow-auto max-h-[50vh]">
         <TableHead className="sticky top-0 bg-tremor-background dark:bg-dark-tremor-background shadow dark:shadow-tremor-dropdown z-10">
           <TableRow>
             <TableHeaderCell className="text-right">#</TableHeaderCell>
-            <TableHeaderCell>Status</TableHeaderCell>
-            {!pipelineId && <TableHeaderCell>Pipeline</TableHeaderCell>}
-            {!triggerId && <TableHeaderCell>Trigger</TableHeaderCell>}
-            <TableHeaderCell>Started at</TableHeaderCell>
-            <TableHeaderCell className="text-right">Duration</TableHeaderCell>
+            <TableHeaderCell>状态</TableHeaderCell>
+            {!pipelineId && <TableHeaderCell>管道ID</TableHeaderCell>}
+            {!triggerId && <TableHeaderCell>触发器ID</TableHeaderCell>}
+            <TableHeaderCell>启动时间</TableHeaderCell>
+            <TableHeaderCell className="text-right">运行时长</TableHeaderCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -113,7 +114,7 @@ const RunsList: React.FC<Props> = ({ pipelineId, query, triggerId }) => {
                   <Link
                     to={`/pipelines/${run.pipeline_id}`}
                     className="link--arrow"
-                    title="View pipeline details"
+                    title="单击查看管道信息"
                     onClick={(event) => event.stopPropagation()}
                   >
                     {run.pipeline_id}
@@ -125,19 +126,20 @@ const RunsList: React.FC<Props> = ({ pipelineId, query, triggerId }) => {
                   <Link
                     to={`/pipelines/${run.pipeline_id}/triggers/${run.trigger_id}`}
                     className="link--arrow"
-                    title="View trigger details"
+                    title="单击查看触发器信息"
                     onClick={(event) => event.stopPropagation()}
                   >
                     {run.trigger_id}
                   </Link>
                 </TableCell>
               )}
-              <TableCell title={formatDateTime(run.start_time, true)}>
+              <TableCell title={formatDateTime(run.start_time, false)}>
                 <Text>
                   {differenceInDays(new Date(), run.start_time) <= 1
                     ? formatDistanceToNow(run.start_time, {
                         addSuffix: true,
                         includeSeconds: true,
+                        locale: zhCN,
                       })
                     : formatDateTime(run.start_time)}
                 </Text>

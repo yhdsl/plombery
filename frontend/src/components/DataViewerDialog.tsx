@@ -29,17 +29,17 @@ const DataViewerDialog: React.FC<Props> = ({
     <>
       <Dialog
         title={taskId}
-        subtitle="View data"
+        subtitle="任务数据"
         isOpen={open}
         footer={
           <Button variant="secondary" color="indigo" onClick={() => onClose()}>
-            Close
+            关闭
           </Button>
         }
         onClose={onClose}
       >
         {!query.isLoading && !query.isError && (
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<div>加载中...</div>}>
             <HotTable
               data={query.data}
               rowHeaders={true}
@@ -53,10 +53,10 @@ const DataViewerDialog: React.FC<Props> = ({
 
         {query.isError &&
           (query.error.response.status === 404 ? (
-            <Text>The task has no data</Text>
+            <Text>该任务无数据输出</Text>
           ) : (
             <Text color="rose">
-              Error fetching task data: {query.error.message}
+              获取数据时出错: {query.error.message}
             </Text>
           ))}
       </Dialog>

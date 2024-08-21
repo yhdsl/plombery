@@ -41,10 +41,10 @@ const PipelineView: React.FC = () => {
   )
 
   if (pipelineQuery.isLoading)
-    return <div>Loading...</div>
+    return <div>加载中...</div>
 
   if (pipelineQuery.isError)
-    return <div>An error has occurred</div>
+    return <div>出现了一个错误</div>
 
   const pipeline = pipelineQuery.data
 
@@ -55,7 +55,7 @@ const PipelineView: React.FC = () => {
           <Flex className="items-start">
             <Flex className="justify-start items-start md:items-center flex-col md:flex-row min-w-0">
               <Title className="truncate max-w-full">
-                Pipeline {pipeline.name}
+                管道 "{pipeline.name}"
               </Title>
               {pipeline.description && (
                 <Text className="truncate max-w-full">
@@ -74,7 +74,7 @@ const PipelineView: React.FC = () => {
     >
       <Grid numItemsMd={2} numItemsLg={3} className="gap-6 mt-6">
         <Card className="flex flex-col h-full">
-          <Title>Tasks</Title>
+          <Title>任务信息</Title>
 
           <List>
             {pipeline.tasks.map((task) => (
@@ -93,7 +93,7 @@ const PipelineView: React.FC = () => {
             {pipeline.tasks.length === 0 && (
               <div className="mt-4">
                 <Text className="text-center italic">
-                  This pipeline has no tasks so it can't be run.
+                 该管道未定义任何任务，无法运行
                 </Text>
 
                 <div className="text-center mt-2 text-sm">
@@ -102,7 +102,7 @@ const PipelineView: React.FC = () => {
                     target="_blank"
                     className="inline-flex items-center gap-2 bg-indigo-50/30 hover:bg-indigo-50 dark:bg-indigo-950/50 dark:hover:bg-indigo-950 rounded-sm px-4 py-2 text-indigo-500 transition-colors duration-300 cursor-pointer no-underline"
                   >
-                    How to create tasks
+                    如何创建任务
                     <Icon
                       icon={ArrowTopRightOnSquareIcon}
                       size="sm"
@@ -119,13 +119,13 @@ const PipelineView: React.FC = () => {
 
           <Flex className="gap-8">
             <Flex className="justify-start w-auto flex-shrink-0">
-              <Text>Run URL</Text>
+              <Text>运行 URL</Text>
 
               <Icon
                 size="sm"
                 color="slate"
                 icon={QuestionMarkCircleIcon}
-                tooltip="URL to run the pipeline programmatically via an HTTP POST request"
+                tooltip="以编程的方式使用 HTTP POST 请求来运行管道的 URL"
               />
             </Flex>
 

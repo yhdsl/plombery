@@ -19,12 +19,12 @@ const TracebackInfoDialog: React.FC<Props> = ({ logEntry }) => {
         size="xs"
         onClick={() => setOpen(true)}
       >
-        Traceback info
+        异常栈信息
       </Button>
 
       <Dialog
         isOpen={open}
-        title="Traceback info"
+        title="异常栈信息"
         footer={
           <Button
             variant="primary"
@@ -33,7 +33,7 @@ const TracebackInfoDialog: React.FC<Props> = ({ logEntry }) => {
               setOpen(false)
             }}
           >
-            Close
+            关闭
           </Button>
         }
         onClose={() => setOpen(false)}

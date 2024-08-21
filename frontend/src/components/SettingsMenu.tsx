@@ -54,9 +54,9 @@ const ThemeSwitch: React.FC = () => {
       index={themeMode}
     >
       <TabList variant="solid">
-        <Tab icon={SunIcon}>Light</Tab>
-        <Tab icon={MoonIcon}>Dark</Tab>
-        <Tab icon={ComputerDesktopIcon}>System</Tab>
+        <Tab icon={SunIcon}>浅色主题</Tab>
+        <Tab icon={MoonIcon}>深色主题</Tab>
+        <Tab icon={ComputerDesktopIcon}>跟随系统</Tab>
       </TabList>
     </TabGroup>
   )

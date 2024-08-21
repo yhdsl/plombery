@@ -103,7 +103,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <StateContext.Provider value={state}>
       {state.isAuthenticationEnabled && state.isLoading
-        ? 'Loading...'
+        ? '加载中...'
         : children}
     </StateContext.Provider>
   )

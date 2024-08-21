@@ -3,7 +3,7 @@ import { Card, Text, Flex, Tracker, Italic, Metric } from '@tremor/react'
 import { HTTPError } from 'ky'
 
 import { PipelineRun } from '../types'
-import { STATUS_COLORS } from '../utils'
+import {formatDate, STATUS_COLORS, translatePipelineRunStatus} from '../utils'
 import ErrorAlert from './queries/Error'
 import { MetricLoader, TextLoader, TrackerLoader } from './queries/Loaders'
 
@@ -14,11 +14,11 @@ interface Props {
 
 const Loader = ({ subject }: { subject: string }) => (
   <Card>
-    <Text>Successful runs</Text>
+    <Text>成功运行</Text>
 
     <MetricLoader />
 
-    <Text className="mt-4">{subject} health</Text>
+    <Text className="mt-4">{subject} 健康监控</Text>
 
     <TrackerLoader />
 
@@ -53,7 +53,7 @@ const RunsStatusChart: React.FC<Props> = ({ query, subject }) => {
   return (
     <Card>
       <Flex className="items-start">
-        <Text>Successful runs</Text>
+        <Text>健康状态</Text>
       </Flex>
 
       <Flex className="justify-start items-baseline space-x-3 truncate">
@@ -65,25 +65,25 @@ const RunsStatusChart: React.FC<Props> = ({ query, subject }) => {
       {runs.length ? (
         <>
           <Flex className="mt-4">
-            <Text>{subject} health</Text>
+            <Text>{subject.replace("Trigger", "触发器").replace("Pipeline", "管道")}健康监控</Text>
           </Flex>
           <Tracker
             className="mt-2"
             data={runs.map((run) => ({
               key: run.id,
               color: STATUS_COLORS[run.status],
-              tooltip: `#${run.id} ${run.status}`,
+              tooltip: `#${run.id} ${translatePipelineRunStatus(run.status)}`,
             }))}
           />
         </>
       ) : (
         <Text className="text-center mt-8">
-          <Italic>This {subject.toLowerCase()} has no runs yet</Italic>
+          <Italic>该{subject.replace("Trigger", "触发器").replace("Pipeline", "管道")}尚未运行过</Italic>
         </Text>
       )}
       <Flex className="mt-2">
-        <Text>{fromDate && fromDate.toDateString()}</Text>
-        <Text>{toDate && toDate.toDateString()}</Text>
+        <Text>{fromDate && formatDate(fromDate)}</Text>
+        <Text>{toDate && formatDate(toDate)}</Text>
       </Flex>
     </Card>
   )

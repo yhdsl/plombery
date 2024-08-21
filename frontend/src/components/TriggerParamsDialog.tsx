@@ -21,12 +21,12 @@ const TriggerParamsDialog: React.FC<Props> = ({ trigger }) => {
         icon={WrenchScrewdriverIcon}
         onClick={() => setOpen(true)}
       >
-        Show params
+        查看参数
       </Button>
 
       <Dialog
         isOpen={open}
-        title="Trigger params"
+        title="触发器参数"
         subtitle={trigger.name}
         footer={
           <Button
@@ -36,7 +36,7 @@ const TriggerParamsDialog: React.FC<Props> = ({ trigger }) => {
               setOpen(false)
             }}
           >
-            Close
+            关闭
           </Button>
         }
         onClose={() => setOpen(false)}

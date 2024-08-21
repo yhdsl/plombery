@@ -20,7 +20,7 @@ const CopyButton: React.FC<Props> = ({ className, content }) => {
       color="indigo"
       size="sm"
       icon={isCopied ? ClipboardDocumentCheckIcon : ClipboardDocumentIcon}
-      tooltip="Click to copy"
+      tooltip="单击复制"
       className={className}
       onClick={() => {
         navigator.clipboard.writeText(content)

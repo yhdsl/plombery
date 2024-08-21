@@ -26,7 +26,7 @@ const Breadcrumbs: React.FC<Props> = ({
   return (
     <Flex className={`gap-x-2 justify-start flex-wrap ${className || ''}`}>
       <Text>
-        <Link to="/">Pipelines</Link>
+        <Link to="/">管道</Link>
       </Text>
       <Separator />
       <Text>
@@ -40,7 +40,7 @@ const Breadcrumbs: React.FC<Props> = ({
       {trigger && (
         <>
           <Separator />
-          <Text>Triggers</Text>
+          <Text>触发器</Text>
           <Separator />
           <Text>
             {run ? (
@@ -57,7 +57,7 @@ const Breadcrumbs: React.FC<Props> = ({
       {run && trigger && (
         <>
           <Separator />
-          <Text>Runs</Text>
+          <Text>运行</Text>
           <Separator />
           <Text>#{run.id}</Text>
         </>

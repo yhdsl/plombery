@@ -45,12 +45,12 @@ const ManualRunDialog: React.FC<Props> = ({ pipeline }) => {
         icon={PlayIcon}
         onClick={() => setOpen(true)}
       >
-        Run
+        运行
       </Button>
 
       <Dialog
         isOpen={open}
-        title={`Run ${pipeline.name} manually`}
+        title={`手动运行 "${pipeline.name}"`}
         onClose={() => setOpen(false)}
       >
         <form
@@ -73,9 +73,9 @@ const ManualRunDialog: React.FC<Props> = ({ pipeline }) => {
           }}
         >
           {query.isLoading ? (
-            'Loading...'
+            '加载中...'
           ) : query.isError ? (
-            'Error'
+            '错误'
           ) : (
             <div style={{ width: 350 }}>
               <JsonSchemaForm schema={query.data} errors={formErrors} />
@@ -98,7 +98,7 @@ const ManualRunDialog: React.FC<Props> = ({ pipeline }) => {
               }}
               disabled={runPipelineMutation.isLoading}
             >
-              Close
+              关闭
             </Button>
 
             <Button
@@ -107,7 +107,7 @@ const ManualRunDialog: React.FC<Props> = ({ pipeline }) => {
               icon={PlayIcon}
               disabled={runPipelineMutation.isLoading}
             >
-              Run
+              运行
             </Button>
           </Flex>
         </form>

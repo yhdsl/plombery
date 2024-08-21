@@ -63,10 +63,10 @@ const TriggerView: React.FC = () => {
   )
 
   if (pipelineQuery.isLoading)
-    return <div>Loading...</div>
+    return <div>加载中...</div>
 
   if (pipelineQuery.isError)
-    return <div>An error has occurred</div>
+    return <div>出现了一个错误</div>
 
   const pipeline = pipelineQuery.data
 
@@ -76,7 +76,7 @@ const TriggerView: React.FC = () => {
     : MANUAL_TRIGGER
 
   if (!trigger) {
-    return <div>Trigger not found</div>
+    return <div>未找到触发器</div>
   }
 
   const runTriggerButton = isManualTrigger ? (
@@ -91,7 +91,7 @@ const TriggerView: React.FC = () => {
         runPipelineMutation.mutateAsync()
       }}
     >
-      Run
+      运行
     </Button>
   )
 
@@ -102,7 +102,7 @@ const TriggerView: React.FC = () => {
           <Flex className="items-start">
             <Flex className="justify-start items-start md:items-center flex-col md:flex-row min-w-0">
               <Title className="truncate max-w-full">
-                Trigger {trigger.name}
+                触发器 "{trigger.name}"
               </Title>
               {trigger.description && (
                 <Text className="truncate max-w-full">
@@ -127,32 +127,32 @@ const TriggerView: React.FC = () => {
           <div style={{ flexGrow: 1 }} />
 
           <ListItem>
-            <Text>Schedule</Text>
+            <Text>调度</Text>
             <Text>
               <Bold>{trigger.schedule}</Bold>
             </Text>
           </ListItem>
 
           <ListItem>
-            <Text>Params</Text>
+            <Text>参数</Text>
             {trigger.params ? (
               <TriggerParamsDialog trigger={trigger} />
             ) : (
               <Text>
-                <em>No params</em>
+                <em>无参数</em>
               </Text>
             )}
           </ListItem>
 
           <Flex className="gap-8">
             <Flex className="justify-start w-auto flex-shrink-0">
-              <Text>Run URL</Text>
+              <Text>运行 URL</Text>
 
               <Icon
                 size="sm"
                 color="slate"
                 icon={QuestionMarkCircleIcon}
-                tooltip="URL to run the pipeline programmatically via an HTTP POST request"
+                tooltip="以编程的方式使用 HTTP POST 请求来运行管道的 URL"
               />
             </Flex>
 

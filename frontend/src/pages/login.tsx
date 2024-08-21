@@ -10,7 +10,7 @@ const LoginPage: React.FC = () => {
           <img src="/mario-pipe-flower.png" alt="Plombery logo" />
         </div>
 
-        <Title className="mb-6">Welcome to Plombery</Title>
+        <Title className="mb-6">欢迎使用 Plombery</Title>
 
         <Button
           onClick={() => {
@@ -20,7 +20,7 @@ const LoginPage: React.FC = () => {
           color="indigo"
           className="shadow-none w-full"
         >
-          Login
+          登录
         </Button>
       </Card>
     </div>

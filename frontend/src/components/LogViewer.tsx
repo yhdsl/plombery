@@ -132,11 +132,11 @@ const LogViewer: React.FC<Props> = ({ pipeline, run }) => {
   }, [])
 
   if (query.isLoading) {
-    return <div>Loading...</div>
+    return <div>加载中...</div>
   }
 
   if (query.isError) {
-    return <div>Error loading logs</div>
+    return <div>加载日志时出错</div>
   }
 
   const logs = query.data.filter((log) => {
@@ -154,13 +154,15 @@ const LogViewer: React.FC<Props> = ({ pipeline, run }) => {
     <Flex flexDirection="col" alignItems="stretch" style={{ maxHeight: 600 }}>
       <Grid numItemsMd={3} className="gap-6 items-start">
         <div>
-          <Text>Tasks</Text>
+          <Text>任务</Text>
 
           <MultiSelect
             className="mt-1 z-20"
             onValueChange={(tasks) => {
               onFilterChange({ tasks })
             }}
+            placeholder="选择..."
+            placeholderSearch="搜索"
           >
             {pipeline.tasks.map((task) => (
               <MultiSelectItem value={task.id} key={task.id}>
@@ -171,13 +173,15 @@ const LogViewer: React.FC<Props> = ({ pipeline, run }) => {
         </div>
 
         <div>
-          <Text>Log level</Text>
+          <Text>日志等级</Text>
 
           <MultiSelect
             className="mt-1 z-20"
             onValueChange={(levels) => {
               onFilterChange({ levels })
             }}
+            placeholder="选择..."
+            placeholderSearch="搜索"
           >
             {Object.keys(LOG_LEVELS_COLORS).map((level) => (
               <MultiSelectItem value={level} key={level} />
@@ -191,7 +195,7 @@ const LogViewer: React.FC<Props> = ({ pipeline, run }) => {
               icon={BarsArrowDownIcon}
               variant="light"
               color={scrollToBottom ? 'indigo' : 'gray'}
-              tooltip="Automatically scroll to the latest logs. Click to toggle"
+              tooltip="自动滚动至最新的日志。点击进行切换"
               className="mr-4"
               style={{
                 cursor: 'pointer',
@@ -214,10 +218,10 @@ const LogViewer: React.FC<Props> = ({ pipeline, run }) => {
       <Table className="mt-6 flex-grow" ref={tableRef}>
         <TableHead className="sticky top-0 bg-tremor-background dark:bg-dark-tremor-background shadow dark:shadow-tremor-dropdown z-10">
           <TableRow>
-            <TableHeaderCell>Time</TableHeaderCell>
-            <TableHeaderCell>Level</TableHeaderCell>
-            <TableHeaderCell>Task</TableHeaderCell>
-            <TableHeaderCell>Message</TableHeaderCell>
+            <TableHeaderCell>时间</TableHeaderCell>
+            <TableHeaderCell>等级</TableHeaderCell>
+            <TableHeaderCell>任务</TableHeaderCell>
+            <TableHeaderCell>消息</TableHeaderCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -231,7 +235,7 @@ const LogViewer: React.FC<Props> = ({ pipeline, run }) => {
               <TableRow key={log.id}>
                 <TableCell>
                   <Text className="font-mono text-xs">
-                    <span title={formatTime(log.timestamp, true)}>
+                    <span title={formatTime(log.timestamp, false)}>
                       {formatTime(log.timestamp)}
                     </span>
 

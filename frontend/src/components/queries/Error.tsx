@@ -16,7 +16,7 @@ const ErrorAlert: React.FC<Props> = ({ query }) => {
     <>
       <Flex justifyContent="start">
         <Icon icon={XCircleIcon} color="rose" className="pl-0" />
-        <Title>Error fetching data</Title>
+        <Title>获取数据时出错</Title>
       </Flex>
       <Text>{query.error.message}</Text>
       <Flex justifyContent="center" className="mt-4">
@@ -26,7 +26,7 @@ const ErrorAlert: React.FC<Props> = ({ query }) => {
           size="xs"
           onClick={() => query.refetch()}
         >
-          Retry
+          重试
         </Button>
       </Flex>
     </>

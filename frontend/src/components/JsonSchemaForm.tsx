@@ -150,7 +150,7 @@ const JsonSchemaForm: React.FC<Props> = ({ errors = {}, schema }) => {
   if (!properties) {
     return (
       <Text className="mt-4">
-        This pipeline has no input parameters, but you can still run it!
+        该管道不支持输入参数，但你仍然可以手动运行!
       </Text>
     )
   }

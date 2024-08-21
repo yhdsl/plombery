@@ -7,6 +7,7 @@ import {
 } from '@heroicons/react/24/outline'
 import { Color } from '@tremor/react'
 import { format, addMinutes } from 'date-fns'
+import { zhCN } from "date-fns/locale"
 
 import { PipelineRunStatus, Task } from './types'
 import { RunningIcon } from './components/RunningIcon'
@@ -53,23 +54,27 @@ export const getTasksColors = (tasks: Task[]) => {
 export const formatDateTime = (date: Date, utc: boolean = false): string => {
   if (utc) {
     const finalDate = addMinutes(date, date.getTimezoneOffset())
-    return format(finalDate, 'd MMM yyyy HH:mm:ss') + ' (UTC)'
+    return format(finalDate, 'yyyy年MMMdd日 HH:mm:ss', { locale: zhCN }) + ' (UTC)'
   } else {
-    return format(date, 'd MMM yyyy HH:mm:ss (XXX)')
+    return format(date, 'yyyy年MMMdd日 HH:mm:ss (OOOO)', { locale: zhCN })
   }
 }
 
 export const formatTime = (date: Date, utc: boolean = false) => {
   if (utc) {
     const finalDate = addMinutes(date, date.getTimezoneOffset())
-    return format(finalDate, 'HH:mm:ss.SSS') + ' (UTC)'
+    return format(finalDate, 'HH:mm:ss.SSS', { locale: zhCN }) + ' (UTC)'
   } else {
-    return format(date, 'HH:mm:ss.SSS')
+    return format(date, 'HH:mm:ss.SSS', { locale: zhCN })
   }
 }
 
-export const formatDate = (date: Date) => format(date, 'd MMM yyyy')
+export const formatDate = (date: Date) => format(date, 'yyyy年MMMdd日', { locale: zhCN })
 
 const numberFormatter = new Intl.NumberFormat()
 
 export const formatNumber = (value: number) => numberFormatter.format(value)
+
+export const translatePipelineRunStatus = (
+    value: PipelineRunStatus | ExtendedStatus
+) => value.replace('pending', '等待中...').replace('running', '运行中...').replace('completed', '成功').replace('failed', '失败').replace('cancelled', '取消').replace('warning', '警告')

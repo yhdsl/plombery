@@ -36,7 +36,7 @@ const RunsTasksList: React.FC<Props> = ({ pipeline, run }) => {
         onClose={() => setViewDataDialog(undefined)}
       />
 
-      <Title>Tasks</Title>
+      <Title>任务</Title>
 
       <List>
         {pipeline.tasks.map((task, i) => (
@@ -78,7 +78,7 @@ const RunsTasksList: React.FC<Props> = ({ pipeline, run }) => {
                 icon={TableCellsIcon}
                 onClick={() => setViewDataDialog(task.id)}
               >
-                Data
+                查看数据
               </Button>
             )}
           </ListItem>

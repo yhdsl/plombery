@@ -45,11 +45,11 @@ const RunViewPage = () => {
   const runQuery = useQuery(getRun(pipelineId, triggerId, runId))
 
   if (pipelineQuery.isLoading) {
-    return <div>Loading...</div>
+    return <div>加载中...</div>
   }
 
   if (pipelineQuery.isError) {
-    return <div>Error</div>
+    return <div>错误</div>
   }
 
   const pipeline = pipelineQuery.data
@@ -62,11 +62,11 @@ const RunViewPage = () => {
   const run = runQuery.data
 
   if (!run) {
-    return <div>Run not found</div>
+    return <div>未找到运行数据</div>
   }
 
   if (!trigger) {
-    return <div>Trigger not found</div>
+    return <div>未找到触发器</div>
   }
 
   const totalTasksDuration = (run.tasks_run || []).reduce(
@@ -83,7 +83,7 @@ const RunViewPage = () => {
     <PageLayout
       header={
         <>
-          <Title>Run #{runId}</Title>
+          <Title>运行ID "#{runId}"</Title>
           <Breadcrumbs pipeline={pipeline} trigger={trigger} run={run} />
         </>
       }
@@ -93,7 +93,7 @@ const RunViewPage = () => {
 
         <Card>
           <Flex className="items-start">
-            <Text>Duration</Text>
+            <Text>耗时</Text>
             <StatusBadge status={run.status} />
           </Flex>
 
@@ -118,7 +118,7 @@ const RunViewPage = () => {
           <Flex alignItems="start" className="mt-2">
             <div>
               <Text>
-                <Bold title={formatDateTime(run.start_time, true)}>
+                <Bold title={formatDateTime(run.start_time, false)}>
                   {formatTime(run.start_time)}
                 </Bold>
               </Text>
@@ -127,7 +127,7 @@ const RunViewPage = () => {
 
             <div className="text-right">
               <Text>
-                <Bold title={formatDateTime(runEndTime, true)}>
+                <Bold title={formatDateTime(runEndTime, false)}>
                   {formatTime(runEndTime)}
                 </Bold>
               </Text>
