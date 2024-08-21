@@ -1,3 +1,6 @@
 -e ..
 python-dateutil
 pandas
+dateutil
+numpy
+pandas
