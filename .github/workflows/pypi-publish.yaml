@@ -24,26 +24,40 @@ jobs:
       id-token: write
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
-        python-version: '3.10'
+        python-version: '3.12'
 
-    - uses: actions/setup-node@v3
+    - uses: actions/setup-node@v4
       with:
-        cache-dependency-path: frontend/yarn.lock
-        node-version: 18
-        cache: 'yarn'
+        cache-dependency-path: frontend/package-lock.json
+        node-version: 20
+        cache: 'npm'
 
     - name: Install frontend dependencies
       working-directory: frontend
-      run: yarn
+      run: npm install
 
     - name: Build frontend
       working-directory: frontend
-      run: yarn build
+      run: npm run build
+
+    - uses: actions/setup-node@v4
+      with:
+        cache-dependency-path: email-templates/package-lock.json
+        node-version: 20
+        cache: 'npm'
+
+    - name: Install email dependencies
+      working-directory: email-templates
+      run: npm install
+
+    - name: Build email
+      working-directory: email-templates
+      run: npm run build
 
     - name: Install py dependencies
       run: |
