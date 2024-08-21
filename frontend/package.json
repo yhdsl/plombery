@@ -1,16 +1,16 @@
 {
-  "name": "plombery",
+  "name": "plombery-chinese",
   "version": "0.4.1",
   "description": "",
   "license": "MIT",
   "author": {
-    "name": "Luca Faggianelli",
-    "email": "luca@velvetlab.tech",
+    "name": "yhdsl",
+    "email": "56674878+yhdsl@users.noreply.github.com",
     "url": "https://lucafaggianelli.github.io/plombery/"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/lucafaggianelli/plombery"
+    "url": "https://github.com/yhdsl/plombery"
   },
   "type": "module",
   "scripts": {
