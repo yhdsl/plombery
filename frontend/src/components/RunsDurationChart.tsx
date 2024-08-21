@@ -5,7 +5,7 @@ import { HTTPError } from 'ky'
 import { PipelineRun } from '../types'
 import ErrorAlert from './queries/Error'
 import { ChartLoader, MetricLoader } from './queries/Loaders'
-import { CustomTooltipType } from "@tremor/react/dist/components/chart-elements/common/CustomTooltipProps"
+import { CustomTooltipProps } from "@tremor/react/dist/components/chart-elements/common/CustomTooltipProps"
 
 interface Props {
   query: UseQueryResult<PipelineRun[], HTTPError>
@@ -44,7 +44,7 @@ const RunsDurationChart: React.FC<Props> = ({ query }) => {
     successfulRuns.reduce((total, current) => total + current.duration, 0) /
       successfulRuns.length || 0
 
-  const customTooltip = (props: CustomTooltipType) => {
+  const customTooltip = (props: CustomTooltipProps) => {
     const { payload, active, label } = props;
     if (!active || !payload) return null;
     return (
