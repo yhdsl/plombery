@@ -1,6 +1,6 @@
 ---
-title: "Pipeline @@{{ pipeline_name }} @@{{ pipeline_status }}"
-preheader: "Your pipeline @@{{ pipeline_name }} @@{{ pipeline_status }}!"
+title: "管道 @@{{ pipeline_name }} @@{{ pipeline_status }}"
+preheader: "你的管道 @@{{ pipeline_name }} 目前 @@{{ pipeline_status }}!"
 bodyClass: bg-slate-50
 ---
 
@@ -17,25 +17,25 @@ bodyClass: bg-slate-50
                 <h1
                   class="m-0 mb-6 text-2xl sm:leading-8 text-black font-semibold"
                 >
-                  Hello,
+                  你好:
                 </h1>
 
                 <p class="m-0 leading-6">
-                  Your pipeline @{{ pipeline_name }} @{{ pipeline_status }}!
+                  你的管道 @{{ pipeline_name }} 目前 @{{ pipeline_status }}!
                 </p>
 
                 <x-spacer height="24px" />
 
                 <x-button href="@{{ pipeline_run_url }}">
-                  See run details &rarr;
+                  查看运行状态 &rarr;
                 </x-button>
 
                 <x-divider space-y="32px" class="bg-slate-200" />
 
                 <p class="m-0 text-sm text-slate-400">
                   <em>
-                    If you don't want to receive these emails, change the
-                    notifications settings in your plombery.config.yml file.
+                    如果你不想再次收到这些电子邮件，
+                    请修改你的 plombery.config.yml 文件中的通知设置。
                   </em>
                 </p>
               </td>
@@ -45,17 +45,17 @@ bodyClass: bg-slate-50
             </tr>
             <tr>
               <td class="text-center text-slate-600 text-xs px-6">
-                <p class="m-0 mb-2">Powered by Plombery</p>
+                <p class="m-0 mb-2">由 Plombery 提供服务</p>
 
                 <p class="m-0 italic">
-                  Python task scheduler with a user-friendly web UI
+                  带有舒适易用 Web UI 的 Python 任务调度程序
                 </p>
 
                 <p class="cursor-default">
                   <a
                     href="https://lucafaggianelli.github.io/plombery/?utm_source=notifications&utm_medium=email&utm_campaign=pipeline_notifications"
                     class="text-indigo-700 [text-decoration:none] hover:![text-decoration:underline]"
-                    >Docs</a
+                    >文档</a
                   >
                   &bull;
                   <a
