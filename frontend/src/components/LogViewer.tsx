@@ -195,7 +195,7 @@ const LogViewer: React.FC<Props> = ({ pipeline, run }) => {
               icon={BarsArrowDownIcon}
               variant="light"
               color={scrollToBottom ? 'indigo' : 'gray'}
-              tooltip="自动滚动至最新的日志。点击进行切换"
+              tooltip="自动滚动至最新的日志。单击进行切换"
               className="mr-4"
               style={{
                 cursor: 'pointer',
@@ -210,7 +210,7 @@ const LogViewer: React.FC<Props> = ({ pipeline, run }) => {
               <span className="relative inline-flex rounded-full h-3 w-3 bg-indigo-500"></span>
             </span>
 
-            <Text className="ml-2 opacity-80">Live logs</Text>
+            <Text className="ml-2 opacity-80">实时日志</Text>
           </Flex>
         )}
       </Grid>
