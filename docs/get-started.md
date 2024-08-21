@@ -51,7 +51,7 @@ pip install plombery-chinese
 那么你可以尝试一下 GitHub Codespaces:
 
 <figure align="center">
-  <img src="https://github.com/lucafaggianelli/plombery/raw/main/docs/assets/images/codespaces.png" alt="在 GitHub Codespaces 上尝试">
+  <img src="https://github.com/yhdsl/plombery/raw/main/docs/assets/images/codespaces.png" alt="在 GitHub Codespaces 上尝试">
 </figure>
 
 Codespaces 是一个运行在云中的开发环境，因此你无需克隆、安装依赖等便可以运行，
