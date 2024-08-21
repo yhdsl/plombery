@@ -68,7 +68,7 @@ const PipelinesList: React.FC = () => {
 
             <div className="text-center mt-2 text-sm">
               <a
-                href="https://lucafaggianelli.github.io/plombery/pipelines/"
+                href="https://yhdsl.github.io/plombery/pipelines/"
                 target="_blank"
                 className="inline-flex items-center gap-2 bg-indigo-50/30 hover:bg-indigo-50 dark:bg-indigo-950/50 dark:hover:bg-indigo-950 rounded-sm px-4 py-2 text-indigo-500 transition-colors duration-300 cursor-pointer no-underline"
               >
