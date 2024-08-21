@@ -1,6 +1,6 @@
 import ssl
 import socket
-from datetime import datetime
+from datetime import datetime, timezone
 
 from apscheduler.triggers.interval import IntervalTrigger
 from plombery import register_pipeline
@@ -57,7 +57,7 @@ class InputParams(BaseModel):
 @task
 async def check_certificate_expiration(params: InputParams):
     logger = get_logger()
-    now = datetime.utcnow()
+    now = datetime.now(timezone.utc)
 
     info = get_certificate_info(params.hostname)
     expiration: datetime = info.get("notAfter")
