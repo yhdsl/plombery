@@ -1,12 +1,12 @@
 import json
-from pathlib import Path
 from typing import Any
 
+from plombery.config import settings
 from plombery.constants import PIPELINE_RUN_LOGS_FILE
 
 
 def _get_data_path(pipeline_run_id: int):
-    data_path = Path.cwd() / ".data" / "runs" / f"run_{pipeline_run_id}"
+    data_path = settings.run_data_storage / "runs" / f"run_{pipeline_run_id}"
 
     # Create dirs (eq. of mkdir -p)
     data_path.mkdir(parents=True, exist_ok=True)

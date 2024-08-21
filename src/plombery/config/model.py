@@ -28,6 +28,7 @@ class Settings(BaseSettings):
     notifications: Optional[List[NotificationRule]] = None
     frontend_url: AnyHttpUrl = AnyHttpUrl("http://localhost:8000")
     allowed_origins: Union[List[AnyHttpUrl], Literal["*"]] = "*"
+    run_data_storage: Path = Path.cwd() / ".data"
 
     model_config = SettingsConfigDict(
         env_file=BASE_SETTINGS_FOLDER / ".env",
