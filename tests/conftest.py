@@ -48,6 +48,7 @@ def authenticated():
 def set_cwd(tmp_path: Path):
     print(f"CWD = {tmp_path}")
     os.chdir(tmp_path)
+    settings.run_data_storage = Path.cwd() / ".data"
     yield tmp_path
 
 
