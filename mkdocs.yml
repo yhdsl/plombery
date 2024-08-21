@@ -1,8 +1,8 @@
-site_name: Plombery
-site_url: https://lucafaggianelli.github.io/plombery
-copyright: Copyright &copy; 2023 Luca Faggianelli
+site_name: Plombery 中文文档
+site_url: https://yhdsl.github.io/plombery
+copyright: Copyright &copy; 2024 yhdsl
 
-repo_url: https://github.com/lucafaggianelli/plombery
+repo_url: https://github.com/yhdsl/plombery
 edit_uri: edit/main/docs/
 
 extra_css:
