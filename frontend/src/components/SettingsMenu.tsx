@@ -119,45 +119,57 @@ const SettingsMenu: React.FC<Props> = () => {
         <Card className="p-0 pt-4 shadow-xl z-20">
           <List>
             <a
-              className="flex items-center px-6 py-2 hover:bg-tremor-brand-faint hover:dark:bg-dark-tremor-brand-faint transition-colors no-underline"
-              href={getApiUrl().replace(/\/api$/, '/docs')}
-              target="_blank"
-              rel="noopener noreferrer"
+                className="flex items-center px-6 py-2 hover:bg-tremor-brand-faint hover:dark:bg-dark-tremor-brand-faint transition-colors no-underline"
+                href={getApiUrl().replace(/\/api$/, '/docs')}
+                target="_blank"
+                rel="noopener noreferrer"
             >
               <Icon
-                icon={CodeBracketSquareIcon}
-                color="slate"
-                className="mr-3"
+                  icon={CodeBracketSquareIcon}
+                  color="slate"
+                  className="mr-3"
               />
               <Text className="flex-grow no-underline border-0">
-                REST API docs
+                REST API 文档
               </Text>
-              <Icon icon={ArrowTopRightOnSquareIcon} color="slate" />
+              <Icon icon={ArrowTopRightOnSquareIcon} color="slate"/>
             </a>
 
             <a
-              className="flex items-center px-6 py-2 hover:bg-tremor-brand-faint hover:dark:bg-dark-tremor-brand-faint transition-colors no-underline"
-              href="https://github.com/lucafaggianelli/plombery"
-              target="_blank"
-              rel="noopener noreferrer"
+                className="flex items-center px-6 py-2 hover:bg-tremor-brand-faint hover:dark:bg-dark-tremor-brand-faint transition-colors no-underline"
+                href="https://github.com/lucafaggianelli/plombery"
+                target="_blank"
+                rel="noopener noreferrer"
             >
-              <Icon icon={ArchiveBoxIcon} color="slate" className="mr-3" />
-              <Text className="flex-grow no-underline border-0">GitHub</Text>
-              <Icon icon={ArrowTopRightOnSquareIcon} color="slate" />
+              <Icon icon={ArchiveBoxIcon} color="slate" className="mr-3"/>
+              <Text className="flex-grow no-underline border-0">GitHub (官方)</Text>
+              <Icon icon={ArrowTopRightOnSquareIcon} color="slate"/>
+            </a>
+
+            <a
+                className="flex items-center px-6 py-2 hover:bg-tremor-brand-faint hover:dark:bg-dark-tremor-brand-faint transition-colors no-underline"
+                href="https://github.com/yhdsl/plombery"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+              <Icon icon={ArchiveBoxIcon} color="slate" className="mr-3"/>
+              <Text className="flex-grow no-underline border-0">GitHub (非官方)</Text>
+              <Icon icon={ArrowTopRightOnSquareIcon} color="slate"/>
             </a>
           </List>
 
           <div className="p-6">
-            <ThemeSwitch />
+            <ThemeSwitch/>
 
-            {isAuthenticationEnabled && <UserInfo />}
+            {isAuthenticationEnabled && <UserInfo/>}
           </div>
 
-          <div className="px-6 pb-3 text-center text-tremor-content-subtle dark:text-dark-tremor-content-subtle text-sm">
+          <div
+              className="px-6 pb-3 text-center text-tremor-content-subtle dark:text-dark-tremor-content-subtle text-sm">
             Plombery v{version}{' '}
             {isNewerRelease && (
-              <span className="text-xs text-amber-600">
-                (v{ghLatestRelease.data?.tag_name} available)
+                <span className="text-xs text-amber-600">
+                (有新版本 v{ghLatestRelease.data?.tag_name} 可用)
               </span>
             )}
           </div>

@@ -66,8 +66,8 @@ httpx.post('${getPipelineRunUrl(pipelineId)}', json={${triggerId ? `\n  "trigger
 
       <Dialog
         isOpen={open}
-        title="Run via HTTP request"
-        subtitle="You can run pipelines and triggers via HTTP requests"
+        title="使用 HTTP 请求运行"
+        subtitle="你可以通过使用 HTTP 请求来运行管道和触发器"
         onClose={() => setOpen(false)}
       >
         <TabGroup>
