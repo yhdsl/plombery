@@ -1,12 +1,10 @@
 import json
+from pathlib import Path
 from typing import Any, Optional
 
 from plombery.config import settings
 from plombery.constants import PIPELINE_RUN_LOGS_FILE
 from plombery.exceptions import InvalidDataPath
-
-
-_base_data_path = settings.run_data_storage
 
 
 def _check_is_valid_path(path: Path) -> None:
@@ -21,13 +19,13 @@ def _check_is_valid_path(path: Path) -> None:
         InvalidDataPath: In case the path is invalid.
     """
     try:
-        path.relative_to(_base_data_path)
+        path.relative_to(settings.run_data_storage)
     except ValueError:
         raise InvalidDataPath(path)
 
 
 def _get_data_path(pipeline_run_id: int, filename: str) -> Path:
-    data_path = _base_data_path / "runs" / f"run_{pipeline_run_id}" / filename
+    data_path = settings.run_data_storage / "runs" / f"run_{pipeline_run_id}" / filename
 
     _check_is_valid_path(data_path)
 
