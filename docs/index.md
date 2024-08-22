@@ -10,7 +10,7 @@ hide:
 如果你想重复执行 Python 脚本并监控运行状态，那么这便是适合你的工具！
 
 ## 功能
-* ⏰ 基于 [APScheduler](https://github.com/agronholm/apscheduler) 的任务调度功能 (支持 Interval， Cron 和 Date 触发器)
+* ⏰ 基于 [APScheduler](https://github.com/agronholm/apscheduler) 的任务调度功能 (支持 Interval，Cron 和 Date 触发器)
 * 💻 内置 Web UI, 无需额外使用 HTML/JS/CSS 进行开发
 * 👩‍💻🐍 仅用纯 Python 语法定义管道和任务
 * 🎛️ 可以使用 [Pydantic](https://docs.pydantic.dev/) 为管道提供参数
