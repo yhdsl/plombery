@@ -13,7 +13,7 @@ import {formatDateTime} from "@/utils"
 const PipelinesList: React.FC = () => {
   const query = useQuery(listPipelines())
 
-  if (query.isLoading) return <div>加载中...</div>
+  if (query.isPending) return <div>加载中...</div>
 
   if (query.isError) return <div>出现了一个错误</div>
 
@@ -71,6 +71,7 @@ const PipelinesList: React.FC = () => {
                 href="https://yhdsl.github.io/plombery/pipelines/"
                 target="_blank"
                 className="inline-flex items-center gap-2 bg-indigo-50/30 hover:bg-indigo-50 dark:bg-indigo-950/50 dark:hover:bg-indigo-950 rounded-sm px-4 py-2 text-indigo-500 transition-colors duration-300 cursor-pointer no-underline"
+                rel="noopener noreferrer"
               >
                 如何创建管道
                 <Icon

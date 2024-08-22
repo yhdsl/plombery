@@ -74,6 +74,7 @@ const TriggersList: React.FC<Props> = ({ pipeline }) => {
                     href="https://yhdsl.github.io/plombery/triggers/"
                     target="_blank"
                     className="inline-flex items-center gap-2 bg-indigo-50/30 hover:bg-indigo-50 dark:bg-indigo-950/50 dark:hover:bg-indigo-950 rounded-sm px-4 py-2 text-indigo-500 transition-colors duration-300 cursor-pointer no-underline"
+                    rel="noopener noreferrer"
                   >
                     如何创建触发器
                     <Icon icon={ArrowTopRightOnSquareIcon} size="sm" className='p-0' color='indigo' />

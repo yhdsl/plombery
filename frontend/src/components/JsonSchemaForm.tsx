@@ -1,3 +1,4 @@
+import { QuestionMarkCircleIcon } from '@heroicons/react/24/outline'
 import {
   Flex,
   Icon,
@@ -9,8 +10,8 @@ import {
 } from '@tremor/react'
 import { JSONSchema7, JSONSchema7TypeName } from 'json-schema'
 import { useCallback, useState } from 'react'
+
 import RangeSlider from './RangeSlider'
-import { QuestionMarkCircleIcon } from '@heroicons/react/24/outline'
 
 interface Props {
   schema: JSONSchema7
@@ -32,6 +33,14 @@ const renderers: Record<FieldType, (field: FieldDefinition) => JSX.Element> = {
   checkbox: (field: FieldDefinition) => {
     return (
       <div className="flex items-center mb-4">
+        <input
+          id={`${field.name}_hidden`}
+          name={field.name}
+          type="hidden"
+          checked={true}
+          readOnly={true}
+          value="false"
+        />
         <input
           id={field.name}
           name={field.name}
@@ -99,8 +108,10 @@ const renderers: Record<FieldType, (field: FieldDefinition) => JSX.Element> = {
     )
   },
   text: (field: FieldDefinition) => {
+    const inputType = field.value.format === 'password' ? 'password' : 'text'
     return (
       <TextInput
+        type={inputType}
         name={field.name}
         placeholder={field.label}
         defaultValue={field.defaultValue}

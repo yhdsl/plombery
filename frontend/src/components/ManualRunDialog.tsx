@@ -72,7 +72,7 @@ const ManualRunDialog: React.FC<Props> = ({ pipeline }) => {
             }
           }}
         >
-          {query.isLoading ? (
+          {query.isPending || query.isFetching ? (
             '加载中...'
           ) : query.isError ? (
             '错误'
@@ -96,7 +96,7 @@ const ManualRunDialog: React.FC<Props> = ({ pipeline }) => {
               onClick={() => {
                 setOpen(false)
               }}
-              disabled={runPipelineMutation.isLoading}
+              disabled={runPipelineMutation.isPending}
             >
               关闭
             </Button>
@@ -105,7 +105,7 @@ const ManualRunDialog: React.FC<Props> = ({ pipeline }) => {
               color="indigo"
               type="submit"
               icon={PlayIcon}
-              disabled={runPipelineMutation.isLoading}
+              disabled={runPipelineMutation.isPending}
             >
               运行
             </Button>
