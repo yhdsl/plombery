@@ -6,7 +6,9 @@
 
 from plombery import get_app  # noqa: F401
 
-import sales_pipeline, sync_pipeline, ssl_certificates  # noqa: F401
+import sales_pipeline  # noqa: F401
+import sync_pipeline  # noqa: F401
+import ssl_certificates  # noqa: F401
 
 
 if __name__ == "__main__":
