@@ -59,7 +59,7 @@ class InputParams(BaseModel):
 @task
 async def check_certificate_expiration(params: InputParams):
     logger = get_logger()
-    now = datetime.now(timezone.utc)
+    now = datetime.now()
 
     info = get_certificate_info(params.hostname)
     expiration: datetime = info.get("notAfter")
