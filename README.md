@@ -44,9 +44,9 @@ Plombery 是一个开源的 Python 任务调度程序，带有简洁易用的 We
   <img src="https://github.com/yhdsl/plombery/raw/main/docs/assets/images/screenshot.png" alt="Plombery 屏幕截图">
 </figure>
 
-> Plombery 项目尚处于起步阶段，因此可以通过大家的反馈和帮助来改进和完善！
-> 如果你喜欢它，请为原始的 Plombery 项目点点 Star 🌟!
-> 如果你想要某个功能或发现错误，请提交 issue。
+> Plombery 项目尚处于起步阶段，因此可以通过大家的反馈和帮助来改进和完善！  
+> 如果你喜欢它，请为原始的 Plombery 项目点点 Star 🌟!  
+> 如果你想要某个功能或发现错误，请提交 issue。  
 
 ## 关于此中文项目
 
@@ -66,7 +66,7 @@ Plombery 构造语法简单，并且没有其它复杂的设计或概念，
 
 ## 功能
 
-- ⏰ 基于 [APScheduler](https://github.com/agronholm/apscheduler) 的任务调度功能 (支持 Interval， Cron 和 Date 触发器)
+- ⏰ 基于 [APScheduler](https://github.com/agronholm/apscheduler) 的任务调度功能 (支持 Interval，Cron 和 Date 触发器)
 - 💻 内置 Web UI, 无需额外使用 HTML/JS/CSS 进行开发
 - 👩‍💻🐍 仅用纯 Python 语法定义管道和任务
 - 🎛️ 可以使用 [Pydantic](https://docs.pydantic.dev/) 为管道提供参数
@@ -131,7 +131,7 @@ Codespaces 是一个运行在云中的开发环境，因此你无需克隆、安
 
 ## 🛣 路线图
 
-查看 [open issues](https://github.com/yhdsl/plombery/issues) 获取完整的建议的功能 (和已知的错误) 清单。
+查看 [issues 页面](https://github.com/yhdsl/plombery/issues) 获取完整的建议的功能 (和已知的错误) 清单。
 
 <p align="right">(<a href="#readme-top">返回顶部</a>)</p>
 
@@ -175,8 +175,8 @@ pip install -r requirements.txt
 pip install -r requirements-dev.txt
 ```
 
-> 本中文项目已经补齐了原始的 Plombery 仓库中丢失的 `requirements.txt` 文件
-> 当前你也可以从 `pyproject.toml` 中安装
+> 本中文项目已经补齐了原始的 Plombery 仓库中丢失的 `requirements.txt` 文件  
+> 当前你也可以从 `pyproject.toml` 中安装  
 
 出于开发的目的，运行示例程序将很有帮助:
 
@@ -204,6 +204,8 @@ cd frontend/
 yarn
 ```
 
+或者
+
 ```sh
 cd frontend/
 # 如果你是克隆的本中文仓库
@@ -217,6 +219,8 @@ npm install
 yarn dev
 ```
 
+或者
+
 ```sh
 npm run dev
 ```
@@ -226,6 +230,8 @@ npm run dev
 ```sh
 yarn run build
 ```
+
+或者
 
 ```sh
 npm run build
