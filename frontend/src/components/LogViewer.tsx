@@ -209,7 +209,7 @@ const LogViewer: React.FC<Props> = ({ pipeline, run }) => {
       </Grid>
 
       <Table className="mt-6 flex-grow" ref={tableRef}>
-        <TableHead className="sticky top-0 bg-tremor-background dark:bg-dark-tremor-background shadow dark:shadow-tremor-dropdown z-10">
+        <TableHead className="sticky top-0 bg-tremor-background dark:bg-dark-tremor-background shadow dark:shadow-tremor-dropdown z-9">
           <TableRow>
             <TableHeaderCell>时间</TableHeaderCell>
             <TableHeaderCell>等级</TableHeaderCell>
