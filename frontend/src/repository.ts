@@ -264,7 +264,7 @@ export const getLatestRelease = (): UseQueryOptions<{
   queryFn: async () => {
     return await ky
       .get(
-        'https://api.github.com/repos/lucafaggianelli/plombery/releases/latest'
+        'https://api.github.com/repos/yhdsl/plombery/releases/latest'
       )
       .json<{ tag_name: string; prerelease: boolean }>()
   },
