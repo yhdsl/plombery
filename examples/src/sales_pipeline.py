@@ -75,6 +75,19 @@ register_pipeline(
                     2023, 1, 1, 22, 30, tzinfo=tz.gettz("Europe/Brussels")
                 ),
             ),
+        ),
+        Trigger(
+            id="daily_paused",
+            name="每日 (暂停)",
+            description="每天运行管道，已被禁用",
+            params=InputParams(pick_a_number=2, store=StoreLocations.Milan),
+            schedule=IntervalTrigger(
+                days=1,
+                start_date=datetime(
+                    2023, 1, 1, 22, 30, tzinfo=tz.gettz("Europe/Brussels")
+                ),
+            ),
+            paused=True,
         )
     ],
     params=InputParams,
