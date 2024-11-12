@@ -1,4 +1,4 @@
-from typing import List
+from typing import Any, Dict, List
 import datetime
 
 from fastapi.encoders import jsonable_encoder
@@ -72,6 +72,7 @@ class PipelineRun(Base):
     id = Column(Integer, primary_key=True, index=True)
     pipeline_id = Column(String, index=True)
     trigger_id = Column(String)
+    params = Column(PydanticType(Dict[str, Any]), default=dict)
     status = Column(String)
     start_time = Column(AwareDateTime)
     duration = Column(Integer, default=0)

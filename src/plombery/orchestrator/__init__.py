@@ -93,6 +93,7 @@ async def run_pipeline_now(
             pipeline_id=pipeline.id,
             trigger_id=trigger_id,
             status=PipelineRunStatus.PENDING,
+            params=params if params is not None else {},
         )
     )
 

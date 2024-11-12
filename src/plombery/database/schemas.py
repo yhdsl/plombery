@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Any, Dict
 from datetime import datetime
 
 from pydantic import BaseModel, Field
@@ -9,6 +9,7 @@ from plombery.schemas import PipelineRunStatus, TaskRun
 class PipelineRunBase(BaseModel):
     pipeline_id: str
     trigger_id: str
+    params: Dict[str, Any]
     status: PipelineRunStatus
     start_time: datetime
     tasks_run: List[TaskRun] = Field(default_factory=list)

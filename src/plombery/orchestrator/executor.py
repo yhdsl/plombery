@@ -24,13 +24,18 @@ def utcnow():
     return datetime.now(tz=timezone.utc)
 
 
-def _on_pipeline_start(pipeline: Pipeline, trigger: Optional[Trigger] = None):
+def _on_pipeline_start(
+        pipeline: Pipeline,
+        trigger: Optional[Trigger] = None,
+        params: Optional[Dict[str, Any]]=None
+):
     pipeline_run = create_pipeline_run(
         PipelineRunCreate(
             start_time=utcnow(),
             pipeline_id=pipeline.id,
             trigger_id=trigger.id if trigger else MANUAL_TRIGGER_ID,
             status=PipelineRunStatus.RUNNING,
+            params=params if params is not None else {},
         )
     )
 
@@ -88,7 +93,7 @@ async def run(
     if pipeline_run:
         _on_pipeline_status_changed(pipeline, pipeline_run, PipelineRunStatus.RUNNING)
     else:
-        pipeline_run = _on_pipeline_start(pipeline, trigger)
+        pipeline_run = _on_pipeline_start(pipeline, trigger, params)
 
     pipeline_run.tasks_run = []
 
