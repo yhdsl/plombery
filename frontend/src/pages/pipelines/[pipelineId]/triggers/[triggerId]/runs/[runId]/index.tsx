@@ -1,6 +1,7 @@
-import { useQuery, useQueryClient } from '@tanstack/react-query'
+import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query'
 import {
   Bold,
+  Button,
   Card,
   CategoryBar,
   Flex,
@@ -10,8 +11,8 @@ import {
   Title,
 } from '@tremor/react'
 import { addMilliseconds, isSameDay } from 'date-fns'
-import { useParams } from 'react-router-dom'
-import { useEffect } from 'react'
+import {useNavigate, useParams} from 'react-router-dom'
+import React, { useEffect } from 'react'
 
 import Breadcrumbs from '@/components/Breadcrumbs'
 import LogViewer from '@/components/LogViewer'
@@ -20,17 +21,28 @@ import StatusBadge from '@/components/StatusBadge'
 import RunsTasksList from '@/components/Tasks'
 import Timer from '@/components/Timer'
 import { MANUAL_TRIGGER } from '@/constants'
-import { getPipeline, getRun } from '@/repository'
+import {getPipeline, getRun, runPipeline} from '@/repository'
 import { socket } from '@/socket'
 import { Trigger } from '@/types'
 import { TASKS_COLORS, formatDate, formatDateTime, formatTime } from '@/utils'
+import {ArrowPathIcon} from "@heroicons/react/24/outline";
 
 const RunViewPage = () => {
+  const navigate = useNavigate()
   const queryClient = useQueryClient()
   const urlParams = useParams()
   const pipelineId = urlParams.pipelineId as string
   const triggerId = urlParams.triggerId as string
   const runId = parseInt(urlParams.runId as string)
+
+  const runPipelineMutation = useMutation({
+    ...runPipeline(pipelineId, triggerId, runId),
+    onSuccess(data) {
+      navigate(
+        `/pipelines/${data.pipeline_id}/triggers/${data.trigger_id}/runs/${data.id}`
+      )
+    },
+  })
 
   useEffect(() => {
     const onRunUpdate = () => {
@@ -87,7 +99,21 @@ const RunViewPage = () => {
     <PageLayout
       header={
         <>
-          <Title>运行ID "#{runId}"</Title>
+          <Flex className="items-start">
+            <Title>运行ID "#{runId}"</Title>
+            <Button
+              size="xs"
+              color="indigo"
+              variant="secondary"
+              icon={ArrowPathIcon}
+              onClick={() => {
+                runPipelineMutation.mutateAsync()
+              }}
+            >
+              再次运行
+            </Button>
+          </Flex>
+
           <Breadcrumbs pipeline={pipeline} trigger={trigger} run={run} />
         </>
       }

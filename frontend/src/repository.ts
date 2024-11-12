@@ -2,6 +2,7 @@ import { UseMutationOptions, UseQueryOptions } from '@tanstack/react-query'
 import ky, { HTTPError, Options } from 'ky'
 
 import { LogEntry, Pipeline, PipelineRun, WhoamiResponse } from './types'
+import { MANUAL_TRIGGER } from '@/constants'
 import { JSONSchema7 } from 'json-schema'
 
 interface BaseError {
@@ -240,13 +241,21 @@ export const getRunData = (
 
 export const runPipeline = (
   pipelineId: string,
-  triggerId?: string
+  triggerId?: string,
+  runId?: number
 ): UseMutationOptions<
   PipelineRun,
   PlomberyHttpError,
   Record<string, any> | void
 > => ({
   async mutationFn(params) {
+    if (triggerId === MANUAL_TRIGGER.id) {
+      triggerId = undefined
+    }
+    if (runId != undefined) {
+      const pipelinerun = await get<PipelineRun>(`runs/${runId}`)
+      params = pipelinerun.params
+    }
     return await post<PipelineRun>(`pipelines/${pipelineId}/run`, {
       json: {
         trigger_id: triggerId,

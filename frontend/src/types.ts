@@ -65,6 +65,7 @@ export interface PipelineRun {
   status: PipelineRunStatus
   pipeline_id: string
   trigger_id: string
+  params: Record<string, any>
   start_time: Date
   duration: number
   tasks_run: TaskRun[]
