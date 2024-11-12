@@ -1,15 +1,14 @@
 import { Badge } from '@tremor/react'
 
-import { PipelineRunStatus } from '@/types'
-import {STATUS_COLORS, STATUS_ICONS, translatePipelineRunStatus} from '@/utils'
+import { ExtendedStatus, STATUS_COLORS, STATUS_ICONS, translateExtendedStatus} from '@/utils'
 
 interface Props {
-  status: PipelineRunStatus
+  status: ExtendedStatus
 }
 
 const StatusBadge: React.FC<Props> = ({ status }) => (
   <Badge color={STATUS_COLORS[status]} icon={STATUS_ICONS[status]}>
-    {translatePipelineRunStatus(status)}
+    {translateExtendedStatus(status)}
   </Badge>
 )
 

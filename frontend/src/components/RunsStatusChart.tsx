@@ -3,7 +3,7 @@ import { Card, Text, Flex, Tracker, Italic, Metric } from '@tremor/react'
 import { HTTPError } from 'ky'
 
 import { PipelineRun } from '../types'
-import {formatDate, STATUS_COLORS, translatePipelineRunStatus} from '../utils'
+import {formatDate, STATUS_COLORS, translateExtendedStatus} from '../utils'
 import ErrorAlert from './queries/Error'
 import { MetricLoader, TextLoader, TrackerLoader } from './queries/Loaders'
 
@@ -72,7 +72,7 @@ const RunsStatusChart: React.FC<Props> = ({ query, subject }) => {
             data={runs.map((run) => ({
               key: run.id,
               color: STATUS_COLORS[run.status],
-              tooltip: `#${run.id} ${translatePipelineRunStatus(run.status)}`,
+              tooltip: `#${run.id} ${translateExtendedStatus(run.status)}`,
             }))}
           />
         </>

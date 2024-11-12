@@ -25,6 +25,7 @@ import { MANUAL_TRIGGER } from '@/constants'
 import { getPipeline, listRuns, runPipeline } from '@/repository'
 import { Trigger } from '@/types'
 import PipelineHttpRun from '@/components/help/PipelineHttpRun'
+import StatusBadge from "@/components/StatusBadge";
 
 const TriggerView: React.FC = () => {
   const navigate = useNavigate()
@@ -68,14 +69,14 @@ const TriggerView: React.FC = () => {
   ) : (
     <Button
       size="xs"
-      color="indigo"
+      color={trigger.paused ? "amber" : "indigo"}
       variant="secondary"
       icon={PlayIcon}
       onClick={() => {
         runPipelineMutation.mutateAsync()
       }}
     >
-      运行
+      {trigger.paused ? "手动运行" : "运行"}
     </Button>
   )
 
@@ -113,6 +114,13 @@ const TriggerView: React.FC = () => {
           <Subtitle>{trigger.description}</Subtitle>
 
           <div style={{ flexGrow: 1 }} />
+
+          <ListItem>
+            <Text>状态</Text>
+            <Text>
+              <StatusBadge status={trigger.paused ? 'paused' : 'available'} />
+            </Text>
+          </ListItem>
 
           <ListItem>
             <Text>调度</Text>

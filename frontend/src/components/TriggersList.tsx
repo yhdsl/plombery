@@ -18,6 +18,7 @@ import { useNavigate } from 'react-router-dom'
 import { Pipeline } from '@/types'
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline'
 import {formatDateTime} from "@/utils"
+import StatusBadge from "@/components/StatusBadge";
 
 interface Props {
   pipeline: Pipeline
@@ -34,6 +35,7 @@ const TriggersList: React.FC<Props> = ({ pipeline }) => {
         <TableHead className="sticky top-0 bg-tremor-background dark:bg-dark-tremor-background shadow dark:shadow-tremor-dropdown z-10">
           <TableRow>
             <TableHeaderCell>名称</TableHeaderCell>
+            <TableHeaderCell>状态</TableHeaderCell>
             <TableHeaderCell>调度</TableHeaderCell>
             <TableHeaderCell>下次运行时间</TableHeaderCell>
           </TableRow>
@@ -49,6 +51,9 @@ const TriggersList: React.FC<Props> = ({ pipeline }) => {
               }
             >
               <TableCell>{trigger.name}</TableCell>
+              <TableCell>
+                <StatusBadge status={trigger.paused ? 'paused' : 'available'} />
+              </TableCell>
               <TableCell>
                 <Text>{trigger.schedule}</Text>
               </TableCell>

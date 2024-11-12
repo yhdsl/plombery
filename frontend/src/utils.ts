@@ -12,7 +12,7 @@ import { zhCN } from "date-fns/locale"
 import { PipelineRunStatus, Task } from './types'
 import { RunningIcon } from './components/RunningIcon'
 
-type ExtendedStatus = PipelineRunStatus | 'warning'
+export type ExtendedStatus = PipelineRunStatus | 'warning' | 'available' | 'paused'
 
 export const STATUS_COLORS: Record<ExtendedStatus, Color> = {
   pending: 'slate',
@@ -21,6 +21,8 @@ export const STATUS_COLORS: Record<ExtendedStatus, Color> = {
   cancelled: 'slate',
   running: 'blue',
   warning: 'amber',
+  available: 'emerald',
+  paused: 'amber',
 }
 
 export const STATUS_ICONS: Record<ExtendedStatus, React.ElementType<any>> = {
@@ -30,6 +32,8 @@ export const STATUS_ICONS: Record<ExtendedStatus, React.ElementType<any>> = {
   cancelled: StopCircleIcon,
   running: RunningIcon,
   warning: ExclamationTriangleIcon,
+  available: CheckCircleIcon,
+  paused: ExclamationTriangleIcon,
 }
 
 export const TASKS_COLORS: Color[] = [
@@ -75,6 +79,6 @@ const numberFormatter = new Intl.NumberFormat()
 
 export const formatNumber = (value: number) => numberFormatter.format(value)
 
-export const translatePipelineRunStatus = (
+export const translateExtendedStatus = (
     value: PipelineRunStatus | ExtendedStatus
-) => value.replace('pending', '等待中...').replace('running', '运行中...').replace('completed', '成功').replace('failed', '失败').replace('cancelled', '取消').replace('warning', '警告')
+) => value.replace('pending', '等待中...').replace('running', '运行中...').replace('completed', '成功').replace('failed', '失败').replace('cancelled', '取消').replace('warning', '警告').replace('paused', '暂停').replace('available', '可用')
